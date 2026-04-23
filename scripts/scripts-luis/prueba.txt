@@ -1,0 +1,66 @@
+## Control de errores
+#!/bin/bash
+
+set -e
+
+host=$1
+
+# Validación
+if [ -z "$host" ]; then
+echo "Error: no has introducido ningún host"
+exit 1
+fi
+
+# Validación de formato
+if [[ ! $host =~ ^[a-zA-Z0-9.-]+$ ]]; then
+echo "Error: formato inválido"
+exit 1
+fi
+
+# Comprobación HTTP real
+if curl -s --head --fail "http://$host" > /dev/null; then
+echo "Web funcionando"
+else
+echo "Error en la web"
+exit 1
+fi
+
+
+##Script config sftp
+#!/bin/bash
+
+set -e
+
+HOST="tu-servidor.com"          #Donde te conectas
+USER="usuario"          #Con que usuario
+REMOTE_DIR="/var/www/html"          #Donde esta la web en el servidor
+LOCAL_DIR="./web"          #Donde esta tu web en tu PC
+
+echo "Iniciando subida..."
+
+sftp $USER@$HOST <<EOF
+cd $REMOTE_DIR
+lcd $LOCAL_DIR
+put -r *
+bye
+EOF
+
+echo "Subida completada"
+
+
+##Script DNS
+#!/bin/bash
+
+DOMAIN="midominio.com"
+IP=$(curl -s ifconfig.me)
+
+echo "IP actual: $IP"
+
+# ¿OPCIONAL? - OBTENER IP PRIVADA
+# ===============================
+IP_PRIVADA=$(hostname -I | awk '{print $1}')
+echo "IP privada: $IP_PRIVADA"
+
+# Aquí iría API (Cloudflare por ejemplo)
+
+echo "DNS actualizado"

@@ -1,0 +1,18 @@
+[Unit]
+Description=Guardian SSH Telegram
+After=network.target
+
+[Service]
+ExecStart=/bin/bash %%GUARDIAN_SH_PATH%%
+Restart=always
+RestartSec=5
+StartLimitBurst=5
+StartLimitIntervalSec=60
+User=root
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=false
+ReadWritePaths=/tmp /etc/ufw /var/lib/guardian /run/ufw.lock /var/crash
+
+[Install]
+WantedBy=multi-user.target
