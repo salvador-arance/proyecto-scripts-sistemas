@@ -252,6 +252,7 @@ main_menu() {
     while true; do
         local choice
         choice=$(zenity --list --radiolist --width=720 --height=420 \
+            --print-column=3 \
             --title="proyecto-scripts-sistemas" \
             --text="Elige una utilidad:" \
             --column="" --column="Familia" --column="Script" --column="Descripción" \

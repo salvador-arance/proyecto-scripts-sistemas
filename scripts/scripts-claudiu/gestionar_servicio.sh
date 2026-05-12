@@ -7,7 +7,7 @@
 if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ $# -ne 3 ]; then
     echo -e "\033[0;34m[USO DEL SCRIPT]\033[0m: $0 <SERVIDOR> <SERVICIO> <ACCIÓN>"
     echo "----------------------------------------------------------------"
-    echo "  <SERVIDOR> : SV_CLAUDIU, SVSV_SALVA, SV_LUIS o una IP directamente."
+    echo "  <SERVIDOR> : SV_CLAUDIU, SV_SALVA, SV_LUIS o una IP directamente."
     echo "  <SERVICIO> : Nombre del servicio (Ej: ssh, apache2, nginx...)"
     echo "  <ACCIÓN>   : start, stop, restart, status"
     echo -e "\n  Ejemplo 1: $0 SV_CLAUDIU apache2 stop"
@@ -29,7 +29,7 @@ ARCHIVO_ERRORES="errores_servicios.log"
 # Según el nombre que pase el usuario, asignamos la IP correspondiente
 case "$SERVIDOR" in
     "SV_CLAUDIU"|"172.30.3.235") IP_DESTINO="172.30.3.235" ;;
-    "SVSV_SALVA"|"172.30.1.144") IP_DESTINO="172.30.1.144" ;;
+    "SV_SALVA"|"172.30.1.144")   IP_DESTINO="172.30.1.144" ;;
     "SV_LUIS"|"172.24.252.34")    IP_DESTINO="172.24.252.34" ;;
     *) 
         echo -e "\033[0;31m[ERROR]\033[0m Servidor no reconocido: $SERVIDOR"
